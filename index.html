@@ -12,67 +12,92 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background: #f4f7f6;
+            background: #0f172a; /* Warna background gelap senada dengan logo */
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vi;
+            min-height: 100vh;
             padding: 20px;
+            color: #f8fafc;
         }
         .container {
-            background: #ffffff;
+            background: #1e293b;
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             max-width: 500px;
             width: 100%;
+            border: 1px solid #334155;
+        }
+        .header-area {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .logo {
+            max-width: 130px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         h2 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 10px;
+            color: #ffffff;
+            font-size: 24px;
+            margin-bottom: 5px;
         }
-        p.subtitle {
-            text-align: center;
-            color: #7f8c8d;
-            margin-bottom: 25px;
+        p.tagline {
+            color: #38bdf8; /* Warna biru muda cyber */
+            font-style: italic;
             font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
         label {
             display: block;
-            margin-bottom: 5px;
-            color: #34495e;
+            margin-bottom: 6px;
+            color: #94a3b8;
             font-weight: 600;
-        }
-        input[type="text"], input[type="tel"], select, textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #bdc3c7;
-            border-radius: 5px;
             font-size: 14px;
+        }
+        input[type="text"], select, textarea {
+            width: 100%;
+            padding: 12px;
+            background: #0f172a;
+            border: 1px solid #475569;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #ffffff;
             outline: none;
-            transition: border 0.3s;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
         input:focus, select:focus, textarea:focus {
-            border-color: #3498db;
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+        }
+        select option {
+            background: #1e293b;
+            color: #ffffff;
         }
         button {
             width: 100%;
-            padding: 12px;
-            background: #3498db;
-            color: white;
+            padding: 14px;
+            background: #38bdf8;
+            color: #0f172a;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.1s;
         }
         button:hover {
-            background: #2980b9;
+            background: #0ea5e9;
+        }
+        button:active {
+            transform: scale(0.98);
         }
         #statusMessage {
             margin-top: 15px;
@@ -80,15 +105,67 @@
             font-weight: bold;
             font-size: 14px;
         }
+        
+        /* Area Sukses & QR Code */
+        .success-container {
+            display: none; /* Tersembunyi di awal */
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+        .success-container h3 {
+            color: #4ade80;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        .success-container p {
+            color: #cbd5e1;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .qr-code {
+            max-width: 220px;
+            width: 100%;
+            height: auto;
+            border: 6px solid #ffffff;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .join-btn {
+            display: inline-block;
+            background: #25d366; /* Warna hijau WhatsApp */
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        .join-btn:hover {
+            background: #20ba5a;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Code Master Smaja</h2>
-    <p class="subtitle">Formulir Pendaftaran Ekstrakurikuler</p>
+    <!-- Header Web -->
+    <div class="header-area">
+        <!-- Logo Code Master -->
+        <img src="logo.jpeg" alt="Logo Code Master Smaja" class="logo">
+        <h2>Code Master Smaja</h2>
+        <p class="tagline">"Satu baris code, menembus dunia"</p>
+    </div>
     
-    <!-- GANTI action dengan URL Web App dari Google Apps Script kamu -->
+    <!-- Formulir Pendaftaran -->
     <form id="regForm" action="https://script.google.com/macros/s/AKfycbzGDW1AWGUY3koEJOn4DSpPqCOWKUAdx40mFhpkggYMdo3xA_zeVhbfGyK4n2g0iT10RA/exec" method="POST">
         <div class="form-group">
             <label for="nama">Nama Lengkap</label>
@@ -98,11 +175,6 @@
         <div class="form-group">
             <label for="gugus">Gugus</label>
             <input type="text" id="gugus" name="gugus" required placeholder="Contoh: Gugus 1 / X-A">
-        </div>
-
-        <div class="form-group">
-            <label for="nowa">No. WhatsApp</label>
-            <input type="tel" id="nowa" name="nowa" required placeholder="Contoh: 08123456789">
         </div>
 
         <div class="form-group">
@@ -123,21 +195,34 @@
         <button type="submit" id="submitBtn">Daftar Sekarang</button>
         <div id="statusMessage"></div>
     </form>
+
+    <!-- Tampilan Sukses & QR Code WA (Akan muncul setelah disubmit) -->
+    <div class="success-container" id="successContainer">
+        <h3>Pendaftaran Berhasil! 🎉</h3>
+        <p>Data kamu telah tersimpan di sistem. Silakan scan QR Code di bawah atau klik tombol untuk langsung bergabung ke Grup WhatsApp calon anggota resmi!</p>
+        
+        <!-- Gambar QR Code WhatsApp -->
+        <img src="qr-wa.jpeg" alt="QR Code Grup WA" class="qr-code">
+        
+        <br>
+        <a href="https://chat.whatsapp.com/BJ3EfxrvKinG5Mf7PKH2Hg?s=cl&p=a&mlu=0&ilr=0" target="_blank" class="join-btn">Gabung Lewat Link WhatsApp</a>
+    </div>
 </div>
 
 <script>
     const form = document.getElementById('regForm');
     const btn = document.getElementById('submitBtn');
     const msg = document.getElementById('statusMessage');
+    const successContainer = document.getElementById('successContainer');
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         btn.disabled = true;
         btn.innerText = "Mengirim...";
-        msg.style.color = "#34495e";
+        msg.style.color = "#38bdf8";
         msg.innerText = "Sedang memproses pendaftaran...";
 
-        // Mengirim data form via AJAX
+        // Mengirim data form via AJAX ke Google Sheets
         fetch(form.action, {
             method: 'POST',
             body: new FormData(form)
@@ -145,20 +230,21 @@
         .then(response => response.json())
         .then(data => {
             if(data.result === "success") {
-                msg.style.color = "#27ae60";
-                msg.innerText = "Pendaftaran Berhasil! Data kamu sudah tersimpan.";
-                form.reset();
+                // Sembunyikan form pendaftaran
+                form.style.display = "none";
+                // Tampilkan container QR Code sukses
+                successContainer.style.display = "block";
             } else {
-                msg.style.color = "#c0392b";
-                msg.innerText = "Terjadi kesalahan. Silakan coba lagi.";
+                msg.style.color = "#f87171";
+                msg.innerText = "Terjadi kesalahan sistem. Silakan coba lagi.";
+                btn.disabled = false;
+                btn.innerText = "Daftar Sekarang";
             }
         })
         .catch(error => {
-            msg.style.color = "#c0392b";
-            msg.innerText = "Terjadi kesalahan koneksi.";
+            msg.style.color = "#f87171";
+            msg.innerText = "Terjadi kesalahan koneksi internet.";
             console.error('Error:', error);
-        })
-        .finally(() => {
             btn.disabled = false;
             btn.innerText = "Daftar Sekarang";
         });
