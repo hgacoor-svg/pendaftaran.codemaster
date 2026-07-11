@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Code Master Smaja</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vi;
+            padding: 20px;
+        }
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        p.subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #34495e;
+            font-weight: 600;
+        }
+        input[type="text"], input[type="tel"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            font-size: 14px;
+            outline: none;
+            transition: border 0.3s;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #3498db;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        #statusMessage {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Code Master Smaja</h2>
+    <p class="subtitle">Formulir Pendaftaran Ekstrakurikuler</p>
+    
+    <!-- GANTI action dengan URL Web App dari Google Apps Script kamu -->
+    <form id="regForm" action="https://script.google.com/macros/s/AKfycbzGDW1AWGUY3koEJOn4DSpPqCOWKUAdx40mFhpkggYMdo3xA_zeVhbfGyK4n2g0iT10RA/exec" method="POST">
+        <div class="form-group">
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" id="nama" name="nama" required placeholder="Masukkan nama lengkap">
+        </div>
+
+        <div class="form-group">
+            <label for="gugus">Gugus</label>
+            <input type="text" id="gugus" name="gugus" required placeholder="Contoh: Gugus 1 / X-A">
+        </div>
+
+        <div class="form-group">
+            <label for="nowa">No. WhatsApp</label>
+            <input type="tel" id="nowa" name="nowa" required placeholder="Contoh: 08123456789">
+        </div>
+
+        <div class="form-group">
+            <label for="divisi">Pilihan Divisi</label>
+            <select id="divisi" name="divisi" required>
+                <option value="" disabled selected>-- Pilih Divisi --</option>
+                <option value="Software">Software</option>
+                <option value="Hardware">Hardware</option>
+                <option value="Desain Grafis">Desain Grafis</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="alasan">Alasan Masuk Eskul</label>
+            <textarea id="alasan" name="alasan" rows="4" required placeholder="Ceritakan alasan kamu ingin bergabung..."></textarea>
+        </div>
+
+        <button type="submit" id="submitBtn">Daftar Sekarang</button>
+        <div id="statusMessage"></div>
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById('regForm');
+    const btn = document.getElementById('submitBtn');
+    const msg = document.getElementById('statusMessage');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        btn.disabled = true;
+        btn.innerText = "Mengirim...";
+        msg.style.color = "#34495e";
+        msg.innerText = "Sedang memproses pendaftaran...";
+
+        // Mengirim data form via AJAX
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.result === "success") {
+                msg.style.color = "#27ae60";
+                msg.innerText = "Pendaftaran Berhasil! Data kamu sudah tersimpan.";
+                form.reset();
+            } else {
+                msg.style.color = "#c0392b";
+                msg.innerText = "Terjadi kesalahan. Silakan coba lagi.";
+            }
+        })
+        .catch(error => {
+            msg.style.color = "#c0392b";
+            msg.innerText = "Terjadi kesalahan koneksi.";
+            console.error('Error:', error);
+        })
+        .finally(() => {
+            btn.disabled = false;
+            btn.innerText = "Daftar Sekarang";
+        });
+    });
+</script>
+
+</body>
+</html>
